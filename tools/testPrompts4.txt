@@ -1,0 +1,167 @@
+cat > tools/testPrompt_banking_cypress.txt <<'EOF'
+Act as a Senior QA Automation Architect with strong experience in Banking, Payments, and Secure Transaction Testing.
+
+Framework constraints:
+- Tool: Cypress
+- Language: JavaScript
+- Design pattern: Page Object Model (POM) or reusable action/helper pattern
+- Use API support where needed
+- Keep code modular, production-ready, and reusable
+- Do not switch to Playwright, Selenium, or other tools
+
+Domain context:
+This is a Banking web application.
+The application contains:
+- Login with username/password
+- 2FA or OTP verification
+- Account summary dashboard
+- Beneficiary management
+- Fund transfer flow
+- Transaction history
+- Session timeout handling
+- Validation and security checks
+
+Task:
+Generate COMPLETE Cypress automation for a hard banking flow with multiple positive, negative, validation, edge, and security-oriented scenarios.
+
+STRICT REQUIREMENTS:
+- Do NOT generate only one scenario
+- Do NOT generate only sample code
+- Do NOT stop with comments like "add more cases later"
+- MUST generate:
+  - 6 positive scenarios
+  - 10 negative scenarios
+  - 6 validation or edge scenarios
+  - 5 security or abuse-oriented scenarios
+
+OUTPUT MUST INCLUDE:
+1. Test scenario list first
+2. Cypress test/spec file with multiple describe() and it() blocks
+3. Page Object classes or reusable action files
+4. Fixtures or test data example
+5. Custom commands or helper utilities if needed
+6. OTP/API helper if needed
+7. Clear assertions for each scenario
+8. TODO comments only where exact selectors are unknown
+
+CODE RULES:
+- Use Cypress best practices
+- Avoid unnecessary hard waits
+- Prefer stable selectors like data-testid, id, role, name when available
+- Use reusable custom commands for login, OTP, beneficiary selection, and transfer submission
+- Cover happy path + failure path + risky path
+- Keep assertions explicit
+- Support modular banking workflow automation
+- If exact selector is unknown, still generate the full scenario and add TODO only for locator details
+
+Application Flow Under Test:
+1. Open Banking web application homepage
+2. Click Login
+3. Verify login form is visible with bank logo
+4. Enter invalid username and invalid password
+5. Verify validation error for invalid credentials
+6. Enter valid username but invalid password
+7. Verify authentication failure message
+8. Enter valid username and valid password
+9. Click Login
+10. Verify OTP page is shown
+11. Fetch OTP using reusable API/helper function
+12. Enter OTP and login successfully
+13. Verify dashboard loads with account summary
+14. Navigate to Add Beneficiary
+15. Add beneficiary with valid details
+16. Verify beneficiary added successfully
+17. Navigate to Fund Transfer
+18. Select source account
+19. Select beneficiary
+20. Enter amount
+21. Enter remarks
+22. Submit transfer
+23. Confirm OTP/transaction PIN if required
+24. Verify transfer success message and updated balance
+25. Verify transaction history contains the new transaction
+
+Generate scenarios around the above flow, including:
+
+Login & Authentication:
+- valid login
+- invalid username
+- invalid password
+- locked user
+- blank fields
+- special characters
+- OTP expired
+- OTP invalid
+- OTP resend
+- session timeout before OTP submit
+
+Beneficiary Management:
+- valid beneficiary add
+- duplicate beneficiary
+- invalid account number
+- invalid IFSC/SWIFT/code
+- blank mandatory fields
+- invalid nickname length
+- unsupported beneficiary type
+
+Fund Transfer:
+- valid internal transfer
+- valid external transfer
+- zero amount
+- negative amount
+- amount above transaction limit
+- insufficient balance
+- invalid remarks length
+- transfer to non-approved beneficiary
+- duplicate submit protection
+- cancel transfer before confirm
+- transfer after session timeout
+
+Transaction History:
+- successful transfer entry visible
+- failed transfer entry handling
+- filter/search validation
+- date range validation
+
+Security-oriented coverage:
+- direct access to dashboard without login
+- direct access to transfer page without auth
+- session expiration handling
+- back-button behavior after logout
+- repeated invalid login attempts / account lock messaging
+- duplicate transaction prevention on double click
+- masking of sensitive data where applicable
+
+Data examples to use:
+- validUsername: customer_001
+- validPassword: Bank@1234
+- invalidUsername: customer_wrong
+- invalidPassword: Wrong@123
+- validOtp: fetch dynamically from helper
+- sourceAccount: Savings Account
+- beneficiaryName: Rahul Sharma
+- beneficiaryAccount: 123456789012
+- invalidBeneficiaryAccount: 123
+- ifscCode: HDFC0001234
+- invalidIfscCode: HDFC000
+- validAmount: 5000
+- zeroAmount: 0
+- negativeAmount: -500
+- overLimitAmount: 10000000
+- remarks: Monthly rent payment
+
+IMPORTANT:
+- Generate ALL requested scenarios
+- Do not return only one login test
+- Do not return pseudo-code only
+- Do not skip security cases
+- Keep it interview-quality and production-style
+
+Output format:
+1. Scenario Matrix
+2. Cypress spec file
+3. Page Objects / reusable actions
+4. Custom commands
+5. OTP helper / API utility
+6. Fixture sample
+EOF

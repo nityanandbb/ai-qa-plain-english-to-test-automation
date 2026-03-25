@@ -1,0 +1,19 @@
+cat > prompt.txt <<'EOF'
+Open the demo webshop homepage at https://demo.opencart.com.
+Click on the Login link.
+Verify Login popup is visible and it has site logo.
+Click on the Username Input, Type Username as test@gamil
+Enter the Password 6 blank spaces and end with 55, then click on the Sign In button.
+Verify it should show mail format validation error: Please enter valid mail id.
+Now re-enter Email ID with test@testinator.20035.com
+Click on the Sign in button.
+Verify it should accept the Mail id, but should show the Password format error and should not accept blank spaces.
+Now add valid password Admin@1234
+Again click on the Sign in button.
+Verify it should show mail OTP is sent message and OTP enter page.
+
+Now send API request to Mailinator site API:
+curl https://api.mailinator.com/api/v2/domains/private/inboxes?token=32267ef66f8f454bb869d5e1d683dfc0
+for test@testinator.20035.com, and read the mail response body.
+Give this mail read API as reusable function.
+EOF

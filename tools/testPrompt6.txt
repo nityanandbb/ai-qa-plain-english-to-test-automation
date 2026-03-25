@@ -1,0 +1,173 @@
+cat > tools/testPrompt_amazon_selenium_testng.txt <<'EOF'
+Act as a Senior QA Automation Architect with strong experience in E-commerce, Payments, Authentication, and Secure Checkout Testing.
+
+Framework constraints:
+- Tool: Selenium
+- Language: Java
+- Test framework: TestNG
+- Design pattern: Page Object Model (POM)
+- Use reusable utilities/helpers
+- Keep code modular, scalable, and production-ready
+- Do not switch to Playwright, Cypress, or Cucumber
+
+Domain context:
+This is an Amazon-like e-commerce web application.
+The application contains:
+- Homepage with search
+- Product listing page
+- Product detail page
+- Login with email/password
+- 2FA / OTP verification
+- User account area
+- Wallet section
+- Add money to wallet
+- Add payment method
+- Cart and checkout basics
+- Session, validation, and security checks
+
+Task:
+Generate COMPLETE Selenium Java TestNG automation for an Amazon-style login + 2FA + wallet payment add flow with multiple positive, negative, validation, edge, and security-oriented scenarios.
+
+STRICT REQUIREMENTS:
+- Do NOT generate only one scenario
+- Do NOT generate only a skeleton
+- Do NOT stop with comments like "add more scenarios later"
+- MUST generate:
+  - 6 positive scenarios
+  - 10 negative scenarios
+  - 6 validation/edge scenarios
+  - 5 security-oriented scenarios
+
+OUTPUT MUST INCLUDE:
+1. Scenario matrix first
+2. TestNG test classes with multiple @Test methods
+3. Page Object classes
+4. Base test / driver setup
+5. Reusable utilities/helpers
+6. OTP / 2FA helper utility
+7. Wallet/payment helper methods
+8. Test data examples
+9. TODO comments only where exact locators are unknown
+
+CODE RULES:
+- Use Selenium best practices
+- Use WebDriverWait, not hard waits
+- Keep page objects reusable and clean
+- Use TestNG annotations such as @BeforeMethod, @AfterMethod, @DataProvider where useful
+- Use assertions clearly for each scenario
+- Prefer stable selectors like id, name, data-testid, aria labels, CSS only when needed
+- If selector is unknown, still generate the full test and add TODO only for locator details
+- Generate interview-quality, repo-ready code
+
+Primary Flow Under Test:
+1. Open Amazon-like homepage
+2. Click Sign In
+3. Verify login page is visible and brand logo is shown
+4. Enter invalid email and verify email validation
+5. Enter valid email and invalid password and verify auth failure
+6. Enter valid email and valid password
+7. Click Continue / Sign In
+8. Verify 2FA / OTP page is shown
+9. Fetch OTP using reusable helper/API/email utility
+10. Enter OTP and complete login
+11. Verify user lands on account/home page successfully
+12. Navigate to Wallet / Amazon Pay section
+13. Click Add Money or Add Payment Method
+14. Add a wallet funding source / payment instrument
+15. Enter valid card/wallet/payment details
+16. Verify payment method add success or wallet funding success
+17. Verify updated wallet balance/payment method visibility
+
+Generate scenarios around this flow, including:
+
+Authentication:
+- valid login + valid 2FA
+- invalid email format
+- unregistered email
+- invalid password
+- blank email
+- blank password
+- special characters in email/password
+- invalid OTP
+- expired OTP
+- OTP resend flow
+- session timeout before OTP submit
+- login with locked/suspended user
+- multiple failed login attempts
+
+Wallet / Payment Add:
+- add valid payment method successfully
+- add money to wallet successfully
+- invalid card number
+- expired card
+- invalid CVV
+- blank cardholder name
+- unsupported card type
+- insufficient funding/add-money failure handling
+- duplicate payment method add
+- cancel payment add flow
+- retry after failure
+- validation on amount field
+- zero amount
+- negative amount
+- over limit amount
+
+Account / Security:
+- direct access to wallet page without login
+- session expiry while adding payment
+- browser back after logout
+- sensitive data masking for card details
+- duplicate submit prevention on payment/add-money action
+- unauthorized access to payment method page
+- rate-limit or messaging after repeated OTP failures
+
+Suggested test data:
+- validEmail: customer001@testinator.com
+- invalidEmail: customer001@test
+- unregisteredEmail: unknownuser@testinator.com
+- validPassword: Amazon@1234
+- invalidPassword: Wrong@123
+- validOtp: fetch dynamically from helper
+- validCardNumber: 4111111111111111
+- invalidCardNumber: 41111111
+- expiredCardMonth: 01
+- expiredCardYear: 2022
+- validExpiryMonth: 12
+- validExpiryYear: 2030
+- validCvv: 123
+- invalidCvv: 12
+- cardholderName: Nityanand Bharati
+- walletAddAmount: 1000
+- zeroAmount: 0
+- negativeAmount: -100
+- overLimitAmount: 1000000
+
+Required framework structure:
+- src/test/java/tests/Login2FAWalletTests.java
+- src/test/java/pages/LoginPage.java
+- src/test/java/pages/OtpPage.java
+- src/test/java/pages/HomePage.java
+- src/test/java/pages/WalletPage.java
+- src/test/java/utils/OtpHelper.java
+- src/test/java/base/BaseTest.java
+- Optional: TestData.java or DataProviders.java
+
+IMPORTANT:
+- Generate ALL requested scenarios
+- Do not return only one login test
+- Do not return pseudo-code only
+- Do not skip wallet negative cases
+- Do not skip security scenarios
+- Keep code reusable and maintainable
+- If exact application selectors are unknown, add TODO comments but still generate all classes and tests
+
+Output format:
+1. Scenario Matrix
+2. BaseTest.java
+3. LoginPage.java
+4. OtpPage.java
+5. HomePage.java
+6. WalletPage.java
+7. OtpHelper.java
+8. Login2FAWalletTests.java
+EOF

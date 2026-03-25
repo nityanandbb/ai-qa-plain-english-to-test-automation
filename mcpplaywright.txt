@@ -1,0 +1,25 @@
+
+---
+
+## 📊 MCP vs Copilot vs Cursor (+ Only MCP)
+
+| Feature                  | MCP + Playwright (Your POC)    | GitHub Copilot | Cursor AI  | ⭐ Only MCP                     |
+| ------------------------ | ------------------------------ | -------------- | ---------- | ------------------------------ |
+| Repo Awareness           | ✅ Deep (via `.qa-ai` indexing) | ⚠️ Limited     | ⚠️ Medium  | ✅ Structured repo indexing     |
+| Plain English → Tests    | ✅ Strong (QA-focused)          | ⚠️ Partial     | ✅ Good     | ✅ QA-specific test generation  |
+| Framework Alignment      | ✅ Exact (POM, rules enforced)  | ❌ Generic      | ⚠️ Semi    | ✅ Enforced architecture rules  |
+| Local / Offline Support  | ✅ Yes                          | ❌ No           | ❌ No       | ✅ Fully offline possible       |
+| Cost                     | ✅ Free (local LLM)             | ❌ Paid         | ❌ Paid     | ✅ Zero API cost setup          |
+| Multi-level Prompting    | ✅ Yes                          | ❌ No           | ⚠️ Limited | ✅ System + Repo + User context |
+| QA-specific Intelligence | ✅ High                         | ❌ Low          | ⚠️ Medium  | ✅ Built for QA workflows       |
+| Repo Structure Sync      | ✅ Yes                          | ❌ No           | ⚠️ Partial | ✅ Mirrors project structure    |
+| Bug Detection Support    | ✅ Yes (AI review)              | ⚠️ Basic       | ⚠️ Medium  | ✅ Context-aware suggestions    |
+| Customization            | ✅ Fully customizable           | ❌ Limited      | ⚠️ Limited | ✅ Fully controllable pipeline  |
+
+---
+
+## 🎯 One-line for “Only MCP” column
+
+**“Only MCP provides repo-aware, framework-enforced, offline-capable QA automation generation.”**
+
+

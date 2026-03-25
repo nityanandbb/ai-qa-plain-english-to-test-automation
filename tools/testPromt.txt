@@ -1,0 +1,30 @@
+Act as a Senior QA Automation Architect.
+
+Use:
+- Selenium
+- Java
+- TestNG
+- POM
+
+Generate COMPLETE automation for an Amazon-like app covering:
+- login
+- 2FA/OTP
+- wallet/add money
+- add payment method
+
+Must include:
+- 6 positive scenarios
+- 10 negative scenarios
+- 6 edge/validation scenarios
+- 5 security scenarios
+
+Give:
+- scenario matrix
+- BaseTest
+- page objects
+- OTP helper
+- TestNG test class with multiple @Test methods
+
+Do not generate only one test.
+Do not generate only skeleton code.
+Use TODO only for unknown selectors.

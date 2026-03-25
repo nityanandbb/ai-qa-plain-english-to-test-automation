@@ -1,0 +1,42 @@
+Create Playwright JavaScript POM-style automation for the Registration Form page.
+
+Coverage required:
+1. Verify all fields are visible:
+   - Name
+   - Middle Name
+   - Surname
+   - Country Code
+   - Mobile Number
+   - Email
+   - Password
+   - Submit Registration button
+
+2. Validate negative scenarios:
+   - Name blank
+   - Name less than 4 characters
+   - Name more than 100 characters
+   - Surname blank
+   - Surname more than 230 characters
+   - Mobile blank
+   - Mobile with non-digit characters
+   - Mobile less than 10 digits
+   - Invalid email format
+   - Password blank
+   - Password with spaces
+   - Password with special characters
+
+3. Validate positive scenario:
+   - Enter valid details
+   - Submit form
+   - Verify success message is shown
+
+4. Use good locators and reusable methods.
+5. No hard waits.
+6. Add assertions for validation messages.
+
+Generate:
+1. Main automated test implementation
+2. Any reusable helper or page-object updates needed
+3. Assertions for all important validations
+4. 5 positive test scenarios
+5. 6 negative / edge / sanity / regression scenarios relevant to this flow

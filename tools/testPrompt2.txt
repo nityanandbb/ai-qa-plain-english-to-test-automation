@@ -1,0 +1,51 @@
+Act as a Senior QA Automation Architect.
+
+Use the repo guardrails, but generate COMPLETE code.
+
+Task:
+Generate Playwright JavaScript POM automation for the login + OTP flow.
+
+STRICT REQUIREMENTS:
+- Do NOT generate only one example test.
+- Do NOT generate a skeleton.
+- Do NOT stop with comments like "Additional test cases..."
+- Must generate at least:
+  - 5 positive test cases
+  - 8 negative test cases
+  - 5 validation or edge test cases
+
+Code output requirements:
+- Use test.describe()
+- Each scenario must be a separate test()
+- Reuse Page Object methods
+- Add a reusable Mailinator helper
+- Keep code modular
+- If exact selectors are unknown, add TODO comments only for those selectors/assertions
+- Still generate all scenarios even if some selectors are TODO
+
+Flow:
+Open the demo webshop homepage at https://demo.opencart.com.
+Click on the Login link.
+Verify Login popup is visible and it has site logo.
+Enter invalid email test@gamil
+Enter password with 6 blank spaces ending with 55
+Click Sign In
+Verify email validation error: Please enter valid mail id
+
+Re-enter valid email test@testinator.20035.com
+Click Sign In
+Verify email is accepted, but password format error is shown and blank spaces are not accepted
+
+Enter valid password Admin@1234
+Click Sign In
+Verify OTP sent message and OTP entry page are shown
+
+Use Mailinator API to fetch OTP from:
+curl https://api.mailinator.com/api/v2/domains/private/inboxes?token=32267ef66f8f454bb869d5e1d683dfc0
+
+Create reusable Mailinator helper methods for reading OTP mail.
+
+Output format:
+1. Page Object code
+2. Mailinator helper code
+3. Full test file with all scenarios

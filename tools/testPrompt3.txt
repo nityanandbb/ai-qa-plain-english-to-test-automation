@@ -1,0 +1,79 @@
+cat > tools/testPrompt_selenium_cucumber.txt <<'EOF'
+Act as a Senior QA Automation Architect.
+
+Framework constraints:
+- Tool: Selenium
+- Language: Java
+- BDD: Cucumber
+- Design pattern: Page Object Model (POM)
+- Use TestNG or JUnit runner (whichever fits Cucumber setup)
+
+Task:
+Generate COMPLETE Selenium Java Cucumber automation for the login + OTP flow.
+
+STRICT REQUIREMENTS:
+- Do NOT generate only one scenario
+- Do NOT generate a skeleton
+- Do NOT stop with comments like "Additional scenarios..."
+- MUST generate:
+  - 5 positive scenarios
+  - 8 negative scenarios
+  - 5 validation/edge scenarios
+
+OUTPUT MUST INCLUDE:
+1. Feature file (.feature) with multiple scenarios
+2. Step Definition class
+3. Page Object class
+4. Mailinator API helper class
+5. Hooks/Base class (driver setup)
+6. Reusable methods (no duplicate code)
+
+CODE RULES:
+- Each scenario must be separate in feature file
+- Step definitions should be reusable (use parameters)
+- Page Object should contain all UI actions
+- Use proper Selenium waits (WebDriverWait)
+- Use clean Java structure
+- If locator is unknown → add TODO comment
+- Still generate ALL scenarios even if selectors are TODO
+
+Mailinator Requirement:
+- Use Mailinator API:
+  curl https://api.mailinator.com/api/v2/domains/private/inboxes?token=32267ef66f8f454bb869d5e1d683dfc0
+- Create reusable Java helper method to fetch OTP
+- Parse response and return OTP
+
+Flow:
+Open the demo webshop homepage at https://demo.opencart.com.
+Click on Login link
+Verify Login popup is visible and has site logo
+
+Enter invalid email: test@gamil
+Enter password: "      55"
+Click Sign In
+Verify error: "Please enter valid mail id"
+
+Re-enter valid email: test@testinator.20035.com
+Click Sign In
+Verify password format error and blank spaces not accepted
+
+Enter valid password: Admin@1234
+Click Sign In
+Verify OTP sent message and OTP page is displayed
+
+Fetch OTP using Mailinator API
+Enter OTP and verify login success
+
+IMPORTANT:
+- Feature file must contain ALL scenarios (not 1)
+- Do not skip negative cases
+- Do not write placeholder text
+- Generate production-ready code
+
+Output format:
+1. Feature file
+2. Step Definitions
+3. Page Object
+4. Mailinator Helper
+5. Hooks/Base setup
+EOF

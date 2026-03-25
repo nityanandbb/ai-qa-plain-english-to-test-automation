@@ -1,0 +1,36 @@
+Using the indexed repository knowledge already built for this repo, analyze the existing framework structure, coding style, utilities, page objects, helpers, fixtures, assertions, and test patterns first.
+
+Then generate repo-aligned automation for the following scenario.
+
+Scenario:
+- Visit the products page
+- Identify the add-to-cart button for the product at index 15
+- Verify the add-to-cart button is visible and enabled before clicking
+- Wait up to 20 seconds only where required for the element or state to become actionable
+- Click the add-to-cart button
+- Verify that the cart popup/modal is displayed
+- Verify that the selected product is added successfully
+- Verify that related add-on products are also added together with the selected product if that is expected behavior in this repo/app
+- Verify quantity update functionality
+- Verify product price, add-on price, subtotal, and total calculations
+
+Important instructions:
+- Reuse existing repo patterns instead of generating generic standalone code
+- Reuse page objects, fixtures, helper methods, custom wrappers, assertions, and locator strategies if they already exist
+- Follow the existing test folder structure and naming conventions from the repo
+- Prefer stable locators already used in the repo
+- Avoid unnecessary hard waits
+- Use Playwright style only if the indexed repo knowledge confirms Playwright patterns
+- If similar product/cart tests already exist, extend that same structure
+
+Generate:
+1. Main automated test implementation
+2. Any reusable helper or page-object updates needed
+3. Assertions for all important validations
+4. 10 positive test scenarios
+5. 10 negative / edge / sanity / regression scenarios relevant to this flow
+
+Output format:
+- First mention what repo patterns/files/components were detected and should be reused
+- Then provide the implementation
+- Then provide the additional test scenarios
