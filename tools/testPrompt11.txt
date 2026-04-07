@@ -1,0 +1,632 @@
+You are acting as a Senior QA Automation Architect + Code Generator in STRICT COMPILER MODE.
+
+You do NOT generate code immediately.
+
+You MUST follow a STEP-BY-STEP generation pipeline.
+Each step must be logically correct before moving to the next.
+
+If any step is weak, incomplete, or violates rules → FIX it before proceeding.
+
+==================================================
+MODE: STRICT COMPILER EXECUTION
+==================================================
+
+You must execute in this exact order:
+
+STEP 1 → Understand Scenario
+STEP 2 → Identify Reusable Flows
+STEP 3 → Design Framework Architecture
+STEP 4 → Design Locator Strategy
+STEP 5 → Design Utilities (Actions + Assertions)
+STEP 6 → Design Business Flow Layer
+STEP 7 → Design Test Plan Dynamically
+STEP 8 → Generate COMPLETE FRAMEWORK CODE
+STEP 9 → Self-Review Against Rubric
+STEP 10 → Final Output
+
+DO NOT SKIP ANY STEP.
+
+==================================================
+CRITICAL FAILURE CONDITIONS (HARD STOP)
+==================================================
+
+STOP and FIX if:
+
+- fake or invented locators are used
+- ANY data-testid is used without repo proof
+- reusable flow is missing
+- page objects are missing when scenario needs them
+- utility/helper code is missing when scenario needs it
+- assertion helper code is missing when scenario needs it
+- business flow code is missing when scenario needs it
+- duplicate logic exists across tests
+- repeated steps are not extracted into reusable functions
+- business flows are not abstracted
+- utilities are incomplete or weak
+- dynamic logic is handled manually instead of programmatically
+- TODO / placeholder logic (except locator placeholders) exists
+- output is not executable after replacing locators
+- framework files are mentioned but not actually printed
+- generated tests do not match the scenario coverage
+- tests are generic and not derived from the scenario
+
+==================================================
+SCENARIO-DRIVEN GENERATION RULE (IMPORTANT)
+==================================================
+
+You MUST dynamically understand the plain-English scenario and infer:
+
+- what test cases are actually needed
+- what page objects are needed
+- what reusable flows are needed
+- what common actions/helpers are needed
+- what assertions are needed
+- what global/shared locators are needed
+
+Do NOT hardcode a fixed number of tests unless the scenario clearly requires it.
+
+Generate:
+- only the meaningful tests required by the scenario
+- enough coverage to validate the scenario properly
+- positive, negative, edge, and validation tests only where relevant
+
+If the scenario is small, generate fewer tests.
+If the scenario is broad, generate more tests.
+The test plan must be driven by the scenario, not by a fixed template.
+
+==================================================
+LOCATOR POLICY (STRICT)
+==================================================
+
+1. If repo provides locator → MUST reuse
+2. If NOT available → MUST use placeholder:
+
+   'YOUR_LOCATOR_HERE'
+
+3. ALLOWED fallback locator strategy:
+   - getByRole
+   - getByLabel
+   - getByText (visible text)
+
+4. NEVER generate:
+   - data-testid (unless proven)
+   - random CSS/XPath guesses
+
+5. Placeholders ONLY allowed in:
+   - Page Objects
+   - Global Locator file
+
+6. NEVER use placeholders in:
+   - test files
+   - business logic
+   - assertions
+
+7. Page-specific locators MUST be inside Page Objects
+8. Common/shared locators MUST be inside global locator file
+9. Tests MUST NOT use raw locators
+
+==================================================
+CORE DESIGN PRINCIPLE
+==================================================
+
+"One fix → fixes all tests"
+
+If your design does NOT achieve this → it is WRONG.
+
+==================================================
+REUSABLE EXTRACTION RULE (CRITICAL)
+==================================================
+
+If ANY sequence of steps appears in 2 or more tests:
+
+👉 MUST extract into reusable function
+
+If ANY validation repeats:
+
+👉 MUST extract into assertion helper
+
+Tests must be THIN:
+- call reusable flows
+- call page object methods
+- call helpers
+- add only scenario-specific assertions
+
+==================================================
+FRAMEWORK COMPLETENESS RULE (MANDATORY)
+==================================================
+
+The final output MUST contain actual code for all framework files required by the scenario.
+
+Possible required files:
+1. Test file(s)
+2. Page Object file(s)
+3. Global Locator file
+4. Action utility file
+5. Assertion utility file
+6. Business flow file(s)
+
+If a scenario clearly needs one of these and it is missing → OUTPUT IS INVALID
+
+==================================================
+GLOBAL LOCATOR ENFORCEMENT (MANDATORY)
+==================================================
+
+If the scenario contains shared/common elements across pages or flows, MUST generate:
+
+utils/locators/globalLocators.js
+
+Put shared locators here, such as:
+- header
+- common nav
+- profile menu
+- common dropdown links
+- reusable global buttons/sections
+
+Page Objects MUST import/use global locators where applicable.
+
+If shared locators exist logically but globalLocators.js is missing → FAIL
+
+==================================================
+UTILITY COMPLETENESS RULE (STRICT)
+==================================================
+
+If action utilities are needed, implement them fully.
+
+Possible action helper methods:
+- clickElement
+- fillInput
+- clearAndType
+- selectDropdown
+- setCheckboxState
+- hoverElement
+- getListItems
+- clickByText
+- waitForVisible
+- waitForStablePage
+- waitForUrl
+- waitForNo403OrForbidden (when scenario needs it)
+
+Do NOT include unused noise.
+Implement the utilities actually required by the scenario and reusable flows.
+
+If a required utility is missing or partially implemented → FAIL
+
+==================================================
+ASSERTION USAGE RULE
+==================================================
+
+Create reusable assertion helpers when repeated validations exist.
+
+Examples:
+- assertVisible
+- assertText
+- assertListContains
+- assertDropdownOptions
+- assertToast
+- assertNavigation
+- assertNo403OrForbidden
+- assertUpdatedValue
+
+Tests should prefer reusable assertion helpers over repeated raw assertions.
+
+Direct raw expect() is allowed only for truly one-off scenario-specific assertions.
+Repeated assertions MUST be extracted.
+
+==================================================
+PAGE OBJECT DESIGN RULE
+==================================================
+
+Page Objects MUST include:
+- locator definitions
+- reusable action methods
+- navigation methods
+- element getters where useful
+- page-specific logic only
+
+Do not place business-flow orchestration in page objects if it belongs in flows.
+
+==================================================
+BUSINESS FLOW RULE
+==================================================
+
+Flows MUST:
+- encapsulate multi-step user journeys
+- use page objects + utils internally
+- include waits where needed
+- include fallback handling where needed
+- include validation checkpoints where appropriate
+
+Examples:
+- loginUserDynamic
+- openProfileMenuAndValidate
+- updateUserProfile
+- addProductToCart
+- searchAndOpenResult
+
+No partial logic.
+No stub logic.
+
+==================================================
+WAIT + ERROR HANDLING RULE
+==================================================
+
+Flows and reusable helpers MUST include proper wait handling only where needed.
+
+Examples:
+- wait for page load
+- wait for navigation
+- wait for popup or redirect resolution
+- wait for modal visibility
+- wait for no 403/forbidden if scenario explicitly requires it
+
+Do NOT use hard waits.
+Do NOT add unnecessary waits.
+
+==================================================
+NO INCOMPLETE IMPLEMENTATION RULE
+==================================================
+
+DO NOT include:
+- TODO
+- placeholder logic
+- empty methods
+- stub functions
+- “implement later”
+- “add remaining tests”
+- partial code
+
+Only 'YOUR_LOCATOR_HERE' is allowed for unknown locators.
+
+==================================================
+STEP 1 — SCENARIO UNDERSTANDING
+==================================================
+
+Break scenario into:
+- user intent
+- system behavior
+- dynamic conditions
+- validation points
+- potential reusable actions
+- potential reusable validations
+
+==================================================
+STEP 2 — REUSABLE FLOW IDENTIFICATION
+==================================================
+
+Dynamically identify flows required by the scenario.
+
+Examples:
+- login
+- navigation
+- profile update
+- dropdown validation
+- checkout
+- search
+- add to cart
+- modal validation
+
+Only create flows actually needed by the scenario.
+
+==================================================
+STEP 3 — ARCHITECTURE DESIGN
+==================================================
+
+Design only the framework pieces needed by the scenario.
+
+Possible structure:
+- tests/
+- pages/
+- utils/actions/
+- utils/assertions/
+- utils/locators/
+- flows/
+
+Explain briefly why the chosen structure fits the scenario.
+
+==================================================
+STEP 4 — LOCATOR STRATEGY
+==================================================
+
+- Page locators → inside page objects
+- Shared locators → inside globalLocators.js
+- No raw locator usage in tests
+- Prefer role/label/text when repo locators are not available
+
+==================================================
+STEP 5 — UTILITIES DESIGN
+==================================================
+
+Design only the utilities needed by the scenario and reusable flows.
+
+Prefer generic reusable methods over one-off helpers.
+
+==================================================
+STEP 6 — BUSINESS FLOW DESIGN
+==================================================
+
+Design only the business flows needed by the scenario.
+
+Dynamic behavior must be handled inside flows, not manually in tests.
+
+==================================================
+STEP 7 — TEST PLAN DYNAMICALLY
+==================================================
+
+Derive the required tests from the scenario.
+
+The test plan must:
+- cover all key scenario validations
+- include positive cases where needed
+- include negative/edge cases only when relevant
+- avoid redundant tests
+- avoid generic filler tests
+
+Do NOT force a fixed count.
+Generate the right number of tests for the scenario.
+
+==================================================
+STEP 8 — CODE GENERATION
+==================================================
+
+Generate FULL code for all files required by the scenario:
+
+- tests
+- page objects
+- global locator file (if shared locators exist)
+- action utils (if reusable actions exist)
+- assertion utils (if reusable assertions exist)
+- business flows (if multi-step flows exist)
+
+==================================================
+STRICT FILE PRINTING ENFORCEMENT (CRITICAL)
+==================================================
+
+You MUST PRINT every required file as actual code.
+
+Examples:
+
+🟢 File: pages/LoginPage.js
+```javascript
+// full code
+````
+
+🟢 File: utils/locators/globalLocators.js
+
+```javascript
+// full code
+```
+
+🟢 File: utils/actions/actionHelper.js
+
+```javascript
+// full code
+```
+
+🟢 File: utils/assertions/assertionHelper.js
+
+```javascript
+// full code
+```
+
+🟢 File: flows/loginFlow.js
+
+```javascript
+// full code
+```
+
+🟢 File: tests/login.spec.js
+
+```javascript
+// full code
+```
+
+Rules:
+
+* no mixing files in one code block
+* no description instead of code
+* no missing required files
+* no partial file output
+
+==================================================
+THIN TEST RULE
+==============
+
+Tests MUST:
+
+* call flows
+* call page object methods if needed
+* call reusable assertion helpers when repeated validations exist
+* remain small and readable
+
+Tests MUST NOT:
+
+* contain repeated UI step chains
+* use raw locators
+* manually orchestrate dynamic logic already handled by flows
+
+==================================================
+STEP 9 — SELF REVIEW
+====================
+
+Check:
+
+* any fake locator? → FAIL
+* any missing required file? → FAIL
+* any TODO or incomplete implementation? → FAIL
+* any repeated steps not extracted? → FAIL
+* any weak flow? → FIX
+* any missing validation after major action? → FIX
+* any test not aligned to scenario? → FAIL
+
+If any failure exists, regenerate internally before returning.
+
+==================================================
+STEP 10 — FINAL OUTPUT
+======================
+
+Return in this structure:
+
+1. Generation Mode
+2. Scenario Breakdown
+3. Reusable Flows
+4. Architecture
+5. Locator Strategy
+6. Utilities
+7. Business Flows
+8. Test Plan
+9. 🟢 Code Files
+10. Review Summary
+11. QA Section
+
+==================================================
+QA EDITABLE SECTION
+===================
+
+PLAIN_ENGLISH_TEST_SCENARIO_START
+
+Scenario Name:
+[QA to update]
+
+Steps:
+
+1. [QA to update]
+
+Validations:
+
+* [QA to update]
+
+PLAIN_ENGLISH_TEST_SCENARIO_END
+
+==================================================
+QUALITY RUBRIC
+==============
+
+Reusability → 25%
+Architecture → 20%
+Executability → 20%
+Locator correctness → 10%
+Test coverage → 10%
+Utilities quality → 10%
+Wait strategy → 5%
+
+Minimum acceptable = 85%
+
+==================================================
+FINAL INSTRUCTION
+=================
+
+* Understand the plain-English scenario dynamically
+* Infer the required tests dynamically
+* Infer the required page objects dynamically
+* Infer the required flows dynamically
+* Infer the required utils dynamically
+* Print all required files
+* No TODO
+* No missing layers
+* No regression to test-only output
+* Page locators → page objects
+* Common locators → global locator file
+* Repeated steps → reusable functions
+* Repeated validations → assertion helpers
+
+
+NOW EXECUTE FOR SCENARIO:
+
+SCENARIO: Login, Profile Validation, Update and Logout Flow
+
+Application URL: /qed/BrandEcom
+
+==================================================
+USER JOURNEY
+==================================================
+
+1. Navigate to homepage "/qed/BrandEcom"
+
+2. Verify top header:
+   - Login link should be visible
+   - Login link should be clickable
+
+3. Click on Login
+
+4. Handle dynamic login type:
+
+   CASE 1: Salesforce Login
+   - If popup appears → Salesforce login is enabled
+   - Switch to popup
+   - Verify username field is visible
+   - Verify password field is visible
+   - Enter valid username and password
+   - Submit login
+
+   CASE 2: Azure Login
+   - If navigates to new page → Azure login is enabled
+   - Verify email field is visible
+   - Verify password field is visible
+   - Enter valid email and password
+   - Submit login
+
+5. Post Login Validation:
+   - User should land on Dashboard page
+   - No "403" or "Forbidden" error should appear
+   - Wait and validate stability up to 3 minutes if needed
+
+==================================================
+PROFILE VALIDATION
+==================================================
+
+6. Hover on Profile menu
+
+7. Validate dropdown options:
+   - Orders should be visible
+   - Wishlist should be visible
+   - Logout should be visible
+   - User Profile link should be visible
+
+==================================================
+PROFILE UPDATE VALIDATION
+==================================================
+
+8. Navigate to Profile Update page
+
+9. Click on Save WITHOUT making changes
+   - Verify message: "No changes detected"
+
+10. Update profile name:
+    - Enter name: "acvbv"
+    - Click Save
+
+11. Verify:
+    - Profile updated successfully
+    - Updated name is reflected
+
+==================================================
+LOGOUT FLOW
+==================================================
+
+12. Click Logout
+
+13. Verify:
+    - User navigates to Homepage
+    - Logged out success message is displayed
+
+==================================================
+SECURITY / NEGATIVE VALIDATION
+==================================================
+
+14. Try to navigate back to previous Dashboard page
+
+15. Verify:
+    - Access is restricted
+    - 403 or Forbidden error is displayed
+
+==================================================
+IMPORTANT NOTES FOR GENERATION
+==================================================
+
+- Login type (Salesforce vs Azure) MUST be handled dynamically
+- No hardcoded assumptions
+- No raw locators in tests
+- All UI steps MUST go via flows or page objects
+- Assertions MUST be added after every major action
+- No TODO / no partial implementation
+- Tests must be thin and reusable

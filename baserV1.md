@@ -67,3 +67,5 @@ Notes
 This repo intentionally does not include real product tests.
 
 The tool is meant to generate tests INTO a target repository (or output patches).
+
+node tools/ask.js "alldata-qa" auto auto "$(tr '\n' ' ' < tools/testPrompt8.txt)"

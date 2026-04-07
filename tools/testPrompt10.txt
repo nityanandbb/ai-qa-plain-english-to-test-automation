@@ -1,0 +1,22 @@
+As a user visiting nvent hoffman site url : "/nvent/hoffman"
+On the homepage in the top header menu login link is present, it should be visible and click on it.
+If popup appears means Salesforce login is enabled currently else if navigates to new page means its using azure login.
+Test should switch to salesforce or azure login as per the avilability.
+If Salesforce login : Enter usernabe or password  OR if. Azure Login : Enter email and password.
+
+Post login should land on the dashboard page.
+No 403 or forbidden error wait max 3 min.
+go to profile hover mouse and  find links displayed  in automsuggestive dropdown as Orders, Wishlist, logout and user profile.
+
+Go to profile update click on the link
+click on save it should show "no changes detected"
+Now again update name "acvbv" and save.
+Verify profile should be updated.
+
+Rules :- 
+1. Reusable code.
+2. Test files
+3. Pageobjecs
+4. Multiples tests.
+5. POM framework follow using Playwright JS 
+

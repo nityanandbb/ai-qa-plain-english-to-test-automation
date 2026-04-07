@@ -33,6 +33,7 @@ STRICT REQUIREMENTS:
 - Do NOT generate only a skeleton
 - Do NOT stop with comments like "add more scenarios later"
 - MUST generate:
+  - All Possible Functional Sanity test scenarios
   - 6 positive scenarios
   - 10 negative scenarios
   - 6 validation/edge scenarios

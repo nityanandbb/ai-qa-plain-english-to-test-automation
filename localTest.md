@@ -329,6 +329,12 @@ node tools/ask-storybook.js \
 "Generate Playwright JS POM tests with validations for this registration form"
 */
 
+node tools/ask-storybook.js \
+"http://google.com" \
+"Generate Playwright JS POM tests with validations for this Google Search"
+*/
+
+node tools/ask.js "alldata-qa" auto auto "$(tr '\n' ' ' < tools/testPrompt8.txt)"
 
                 ┌──────────────────────────┐
                 │      User Input          │
@@ -367,3 +373,7 @@ node tools/ask-storybook.js \
                 │   Generated Output       │
                 │ Playwright Test + POM    │
                 └──────────────────────────┘
+
+
+    node tools/ask.js "alldata-qa" auto auto "$(tr '\n' ' ' < tools/testPrompt8.txt)"
+     node tools/build.js /Users/qed42/NB2025/allDataRepo/alldata-qa

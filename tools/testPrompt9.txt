@@ -1,0 +1,335 @@
+Using the indexed repository knowledge already built for this repo, first analyze and reuse the actual framework structure, coding style, utilities, page objects, helpers, fixtures, assertions, custom wrappers, locator strategies, wait handling, folder structure, and test patterns that already exist in this repository.
+
+CRITICAL BEHAVIOR RULE:
+
+If repository knowledge is:
+- clearly available → STRICTLY reuse repo patterns
+- partially available → reuse what exists + minimal safe additions
+- NOT available or insufficient → FALL BACK to industry best practices for automation framework design and Playwright test implementation
+
+You MUST explicitly mention which mode you are using:
+- "Repo-driven generation"
+- "Hybrid generation (partial repo + best practices)"
+- "Best-practice fallback (repo not indexed or insufficient data)"
+
+--------------------------------------------------
+STRICT GENERATION RULES
+--------------------------------------------------
+1. Do NOT generate generic standalone code if repo-aligned code can be created.
+2. Do NOT invent files, classes, methods, locators, helpers, wrappers, fixtures unless:
+   - they are not detected in repo
+   - they are required for execution
+   - they are clearly marked as "Minimal safe addition"
+3. Do NOT use phrases like:
+   - "Assuming this exists"
+   - "If needed"
+   - "You can create"
+   - "Sample locator"
+4. NEVER leave:
+   - TODO
+   - incomplete logic
+   - placeholder validations
+5. Use Playwright ONLY if:
+   - repo confirms it OR
+   - fallback mode is active
+6. Locator strategy:
+   - Prefer repo locators
+   - If fallback → use stable best practices (role, aria, text, data-testid, scoped locator)
+7. Avoid hard waits completely unless unavoidable
+8. Use max 20 seconds wait only for actionable states
+9. Follow repo folder structure if available
+10. Do NOT break or duplicate existing files
+11. Reuse:
+   - fixtures
+   - wrappers
+   - helper functions
+   - assertion utilities
+12. Create reusable functions for repeated flows and repeated validations
+13. Do NOT duplicate the same cart flow across positive and negative tests
+14. If similar tests exist → extend them, do not recreate
+15. Always explain what is reused vs newly added
+16. The generated output must include MULTIPLE TESTS, not only one test
+17. The generated output must include a reusable business-flow function, such as:
+   - add product to cart flow
+   - cart modal open flow
+   - quantity update flow
+   - calculation validation flow
+18. The generated output must include reusable validation helpers for assertions
+19. Positive and negative tests must call the reusable functions instead of repeating steps inline
+20. If data-driven or parameterized tests match repo style, use them
+21. If repo style does not support parameterized tests, create multiple explicit tests using shared helper functions
+22. Test scenarios must reflect practical QA automation coverage, not only repeated index changes
+
+--------------------------------------------------
+MANDATORY TEST DESIGN RULES
+--------------------------------------------------
+The generated automation must contain:
+
+A. One reusable action/helper layer for repeated business flow, such as:
+- open products page
+- get product card by index
+- validate add-to-cart actionability
+- click add-to-cart
+- open/validate cart modal
+- update quantity
+- capture product/add-on/cart pricing values
+
+B. One reusable validation/assertion layer for:
+- product added validation
+- add-on presence validation
+- quantity validation
+- price validation
+- subtotal validation
+- total validation
+- invalid index / disabled state / missing control validations where applicable
+
+C. Multiple automated tests, such as:
+- happy path add to cart
+- add product with bundled add-ons
+- quantity update recalculates totals
+- cart modal visibility after add
+- invalid index handling
+- disabled add-to-cart handling
+- repeated add action behavior
+- cart pricing integrity validation
+
+D. If relevant and repo-safe, create:
+- a small test data array / scenario matrix
+OR
+- multiple explicit tests using shared utility methods
+
+--------------------------------------------------
+OUTPUT FORMAT (MANDATORY)
+--------------------------------------------------
+
+--------------------------------------------------
+1. GENERATION MODE
+--------------------------------------------------
+Clearly state:
+- Repo-driven generation
+OR
+- Hybrid generation
+OR
+- Best-practice fallback
+
+Explain why this mode was selected.
+
+--------------------------------------------------
+2. DETECTED REPO EVIDENCE
+--------------------------------------------------
+List clearly:
+
+Detected in repo:
+- test framework
+- matching test files
+- page objects
+- helpers/utils
+- fixtures
+- assertions
+- locator strategy
+- wait handling
+- similar tests
+
+Not clearly detected:
+- missing components
+
+Reuse recommendation:
+- what should be reused
+- what should be extended
+- what must be minimally added
+
+--------------------------------------------------
+3. IMPLEMENTATION APPROACH
+--------------------------------------------------
+Explain:
+- which existing files will be reused
+- which existing files will be updated
+- whether new files are truly required
+- how reusable flow functions will be structured
+- how reusable assertion helpers will be structured
+- how multiple tests will be built without duplicate flow code
+- why this is safest for the repo
+
+--------------------------------------------------
+4. MAIN AUTOMATION DESIGN
+--------------------------------------------------
+Generate an implementation that includes:
+
+A. Main reusable business-flow function(s)
+B. Reusable validation helper/assertion function(s)
+C. Multiple valid automated test cases using those shared functions
+
+Required scenario coverage should include at minimum:
+1. Add product at index 15 and validate cart popup
+2. Validate selected product is added successfully
+3. Validate expected bundled add-ons are added, if applicable
+4. Validate quantity update functionality
+5. Validate product price, add-on price, subtotal, and total
+6. Validate negative/edge case such as invalid index or disabled add-to-cart
+
+--------------------------------------------------
+5. TEST FILE IMPLEMENTATION
+--------------------------------------------------
+Generate the actual spec/test file.
+
+Rules:
+- must contain multiple tests, not just one
+- must reuse shared helper methods/functions
+- must avoid repeated inline steps
+- must follow repo test naming conventions
+- must follow repo folder structure
+- if suitable, organize with describe blocks and reusable setup
+
+--------------------------------------------------
+6. PAGE OBJECT UPDATES
+--------------------------------------------------
+Generate only required page object updates.
+
+Rules:
+- extend existing page object if detected
+- add only missing methods
+- no duplicate methods
+- unique method names
+- repo naming style
+- methods should support reuse across multiple tests
+
+--------------------------------------------------
+7. REUSABLE UTILS / HELPERS / ASSERTIONS
+--------------------------------------------------
+Generate reusable utilities and assertions.
+
+Examples:
+- addProductToCartByIndex(...)
+- assertCartModalVisible(...)
+- assertProductPresentInCart(...)
+- assertExpectedAddOnsInCart(...)
+- updateCartItemQuantity(...)
+- assertPriceBreakdown(...)
+- assertTotalsRecalculated(...)
+- assertAddToCartUnavailable(...)
+
+Rules:
+- no TODO
+- no incomplete implementation
+- reusable across multiple tests
+- no repeated flow logic in spec file
+- aligned with repo utility style OR best-practice fallback
+
+--------------------------------------------------
+8. WAIT MANAGEMENT STRATEGY
+--------------------------------------------------
+Explain:
+- where waits are used
+- why needed
+- how max 20 seconds is applied
+- how hard waits are avoided
+- how flakiness is minimized
+
+--------------------------------------------------
+9. ADDITIONAL TEST SCENARIOS
+--------------------------------------------------
+
+A. 10 Positive scenarios
+These must be meaningful functional QA scenarios, not just changing product index values.
+
+B. 10 Negative / Edge / Sanity / Regression scenarios
+These must be practical automation-relevant scenarios for product/cart behavior.
+
+--------------------------------------------------
+10. FILE IMPACT SUMMARY
+--------------------------------------------------
+Provide:
+- existing files to reuse
+- existing files to update
+- new files required only if unavoidable
+- no duplicate files
+- no unnecessary impact on existing tests
+
+--------------------------------------------------
+11. FINAL CODE OUTPUT
+--------------------------------------------------
+Return code blocks separately for:
+- test file
+- page object file updates
+- reusable utils/helpers/assertions
+- any fixture/helper update if required
+
+The test file must contain multiple tests using shared reusable methods.
+
+--------------------------------------------------
+12. QA EDITABLE SCENARIO SECTION (MANDATORY)
+--------------------------------------------------
+
+PLAIN_ENGLISH_TEST_SCENARIO_START
+
+Scenario Name:
+[QA to update]
+
+Module / Page:
+[QA to update]
+
+Business Goal:
+[QA to update]
+
+Preconditions:
+- [QA to update]
+- [QA to update]
+
+Test Data:
+- [QA to update]
+- [QA to update]
+
+Reusable Flow Required:
+- [QA to update]
+- [QA to update]
+
+Main Flow:
+1. [QA to update]
+2. [QA to update]
+3. [QA to update]
+4. [QA to update]
+
+Validations:
+- [QA to update]
+- [QA to update]
+- [QA to update]
+
+Expected Add-on Behavior:
+- [QA to update]
+
+Calculation Validations:
+- [QA to update]
+- [QA to update]
+
+Negative / Edge Conditions:
+- [QA to update]
+- [QA to update]
+
+Regression Considerations:
+- [QA to update]
+- [QA to update]
+
+Post-Conditions:
+- [QA to update]
+
+Notes / Repo-Specific Context:
+- [QA to update]
+
+PLAIN_ENGLISH_TEST_SCENARIO_END
+
+--------------------------------------------------
+NOW EXECUTE FOR THIS SCENARIO:
+--------------------------------------------------
+
+Visit the products page.
+Identify the add-to-cart button for the product at index 15.
+Verify the add-to-cart button is visible and enabled before clicking.
+Wait up to 20 seconds only where required for the element or state to become actionable.
+Click the add-to-cart button.
+Verify that the cart popup/modal is displayed.
+Verify that the selected product is added successfully.
+Verify that related add-on products are also added together with the selected product if that is expected behavior in this repo/app.
+Verify quantity update functionality.
+Verify product price, add-on price, subtotal, and total calculations.
+
+Also generate multiple practical automation tests that reuse common add-to-cart and cart-validation functions instead of only generating one test.
